@@ -1,8 +1,12 @@
 package com.jjeswseo.myandroidapi;
 
+import java.io.IOException;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaRecorder;
+import android.os.Environment;
 import android.sax.StartElementListener;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
@@ -12,9 +16,37 @@ import android.widget.Toast;
 public class PhoneStateReceiver extends BroadcastReceiver {
 	private final String TAG = "PhoneStateReceiver";
 	//private static int pState = TelephonyManager.CALL_STATE_IDLE;
+	MediaRecorder mMediaRecorder = new MediaRecorder();
+	boolean isRecording = false;
+	
+	private void prepareRec(){
+		if(mMediaRecorder == null){
+			mMediaRecorder = new MediaRecorder();
+		}
+		mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_CALL);
+		mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+		mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+		String path = "";
+		String ext = Environment.getExternalStorageState();
+		if (ext.equals(Environment.MEDIA_MOUNTED)) {
+			path = Environment.getExternalStorageDirectory().getAbsolutePath();
+		}
+		path += "/test.3gp";
+		mMediaRecorder.setOutputFile(path);
+		try {
+			mMediaRecorder.prepare();
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		
+		//prepareRec();
 		TelephonyManager telManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
 		int state = telManager.getCallState();
 		//Toast.makeText(context, "통화상태["+state+"].", Toast.LENGTH_SHORT).show();
@@ -28,7 +60,12 @@ public class PhoneStateReceiver extends BroadcastReceiver {
 			//통화 종료 후 구현 ...
 			//Log.i(TAG, "state[EXTRA_STATE_IDLE]");
 			Toast.makeText(context, "통화 종료.", Toast.LENGTH_SHORT).show();
-			context.stopService(new Intent(context, com.jjeswseo.myandroidapi.RecService.class));
+			//context.stopService(new Intent(context, com.jjeswseo.myandroidapi.RecService.class));
+			if(isRecording){
+				mMediaRecorder.stop();
+				mMediaRecorder.release();
+				isRecording = false;
+			}
 		}
 		else if(state == TelephonyManager.CALL_STATE_RINGING)
 		{
@@ -42,7 +79,39 @@ public class PhoneStateReceiver extends BroadcastReceiver {
 			//Log.i(TAG, "state[EXTRA_STATE_OFFHOOK]");
 			Toast.makeText(context, "통화 중.", Toast.LENGTH_SHORT).show();
 			Log.i(TAG, "service를 호출합니다.");
-			context.startService(new Intent(context, com.jjeswseo.myandroidapi.RecService.class));
+			//context.startService(new Intent(context, com.jjeswseo.myandroidapi.RecService.class));
+			
+			
+			if(mMediaRecorder == null){
+				mMediaRecorder = new MediaRecorder();
+			}
+			mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_CALL);
+			mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+			mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+			String path = "";
+			String ext = Environment.getExternalStorageState();
+			if (ext.equals(Environment.MEDIA_MOUNTED)) {
+				path = Environment.getExternalStorageDirectory().getAbsolutePath();
+			}
+			path += "/test.3gp";
+			mMediaRecorder.setOutputFile(path);
+			try {
+				mMediaRecorder.prepare();
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+			
+			
+			mMediaRecorder.start();
+			isRecording = true;
 		}
 
 		if(intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL))
