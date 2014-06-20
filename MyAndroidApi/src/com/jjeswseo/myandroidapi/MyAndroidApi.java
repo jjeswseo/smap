@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -16,8 +17,27 @@ import android.content.pm.ResolveInfo;
 
 public class MyAndroidApi extends ListActivity {
 	public final static String CATEGORY_SAMPLE_CODE="com.jjeswseo.myandroidapi.category.SAMPLE_CODE";
+	
+	private boolean DEVELOPER_MODE = false;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
+		if (DEVELOPER_MODE) {
+	         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+	                 .detectDiskReads()
+	                 .detectDiskWrites()
+	                 .detectNetwork()   // or .detectAll() for all detectable problems
+	                 .penaltyLog()
+	                 .build());
+	         StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+	                 .detectLeakedSqlLiteObjects()
+	                 .detectLeakedClosableObjects()
+	                 .penaltyLog()
+	                 .penaltyDeath()
+	                 .build());
+	     }
+		
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.activity_my_android_api);
 		
