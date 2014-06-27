@@ -24,7 +24,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/CustomActionBarTheme" >
         <activity
             android:name="com.jjeswseo.myandroidapi.MyAndroidApi"
             android:label="@string/app_name" >
@@ -56,6 +56,15 @@
         <activity
             android:name="com.jjeswseo.myandroidapi.CameraActivity"
             android:label="@string/title_activity_camera" >
+            <intent-filter>
+                <action android:name="com.jjeswseo.myandroidapi.action.DEMO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.jjeswseo.myandroidapi.RecListViewActivity"
+            android:label="@string/title_activity_rec_list_view" >
             <intent-filter>
                 <action android:name="com.jjeswseo.myandroidapi.action.DEMO" />
 

@@ -2,6 +2,9 @@ package com.jjeswseo.myandroidapi;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -20,6 +23,7 @@ public class RecService extends Service {
 	String tmpFileName = null;
 	String tmpDir = null;
 	String date = null;
+	String savedFileName = null;
 	private ExecutorService mThreadPool;
 	 
 	@Override
@@ -50,6 +54,7 @@ public class RecService extends Service {
 		mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 		mMediaRecorder.setOutputFile(tmpDir+File.separator+tmpFileName);
+		
 		try {
 			mMediaRecorder.prepare();
 		} catch (IllegalStateException e) {
@@ -73,16 +78,22 @@ public class RecService extends Service {
 		String number = mCursor.getString(mCursor.getColumnIndex(CallLog.Calls.NUMBER));
 		String type = mCursor.getString(mCursor.getColumnIndex(CallLog.Calls.TYPE));
 		date = mCursor.getString(mCursor.getColumnIndex(CallLog.Calls.DATE));
+		long dateLong = Long.parseLong(date);
 		Log.i(TAG, "number,type,date["+number+"]["+type+"]["+date+"]");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss",Locale.getDefault());
+		String mDateString = sdf.format(new Date(dateLong));
+		savedFileName = number+"("+mDateString+")";
 		mCursor.close();
+		
 		mThreadPool.execute(new Runnable() {
 			@Override
 			public void run() {
 				Log.i(TAG, "Temp File["+tmpDir+File.separator+tmpFileName+"]");
 				File tmpFile = new File(tmpDir+File.separator+tmpFileName);
-				File saveFile = new File(tmpDir+File.separator+date+".3gp");
+				File saveFile = new File(tmpDir+File.separator+savedFileName+".3gp");
 				tmpFile.renameTo(saveFile);
-				Log.i("RecService[Runnable]","Saved File ["+tmpDir+File.separator+date+".3gp]");
+				Log.i(TAG, "rename["+savedFileName+"]");
+				Log.i("RecService[Runnable]","Saved File ["+tmpDir+File.separator+savedFileName+".3gp]");
 			}
 		});
 		
