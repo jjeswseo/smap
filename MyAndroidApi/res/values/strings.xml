@@ -7,6 +7,7 @@
     <string name="title_activity_hello">HelloActivity</string>
     <string name="title_activity_dialog">DialogActivity</string>
     <string name="title_activity_rec_list_view">RecListViewActivity</string>
+    <string name="title_swipe_refresh_layout_basic">SwipeRefreshLayoutBasic</string>
     <string name="dialog_activity_text">  How To Use!! Test Text </string>
     <string name="dialog_activity_add">  Add  </string>
     <string name="dialog_activity_remove">  Remove  </string>
@@ -17,4 +18,17 @@
     <string name="action_refresh">action_refresh</string>
     <string name="action_help">action_help</string>
     <string name="action_check_updates">action_check_updates</string>
+    
+    <string name="intro_message">
+        <![CDATA[
+
+
+            A basic sample which shows how to use SwipeRefreshLayout to add the \'swipe-to-refresh\'
+            gesture to a View, enabling the ability to trigger a refresh from swiping down on the view.
+            In this sample the View which can be refreshed is a ListView.
+
+
+        ]]>
+    </string>
+    
 </resources>

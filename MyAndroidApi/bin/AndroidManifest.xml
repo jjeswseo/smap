@@ -71,6 +71,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+                <activity
+            android:name="com.jjeswseo.myandroidapi.SwipeRefreshLayoutBasic"
+            android:label="@string/title_swipe_refresh_layout_basic" >
+            <intent-filter>
+                <action android:name="com.jjeswseo.myandroidapi.action.DEMO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <receiver android:name="com.jjeswseo.myandroidapi.PhoneStateReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" >
