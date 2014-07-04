@@ -9,6 +9,8 @@
     <dimen name="margin_large">32dp</dimen>
     <dimen name="margin_huge">64dp</dimen>
 
+    <dimen name="list_height">180dp</dimen>
+    <dimen name="list_image_width">180dp</dimen>
     <!-- Semantic definitions -->
 
     <dimen name="horizontal_page_margin">@dimen/margin_medium</dimen>

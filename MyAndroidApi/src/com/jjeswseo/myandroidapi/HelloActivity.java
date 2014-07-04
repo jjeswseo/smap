@@ -26,7 +26,7 @@ public class HelloActivity extends Activity {
 	}
 	public void helloClick(View v){
 		Log.v(TAG, "helloClick Fire");
-		startActivity(new Intent(getBaseContext(), com.jjeswseo.myandroidapi.RecListViewActivity.class));
+		Log.i(TAG, "Package["+getApplicationContext().getPackageName()+"]");
 	}
 	
 	private OnClickListener mStartRecordListener = new OnClickListener(){

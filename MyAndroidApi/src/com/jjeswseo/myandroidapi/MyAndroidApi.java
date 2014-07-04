@@ -52,7 +52,7 @@ public class MyAndroidApi extends ListActivity {
 		
 		//Context context 						: Activity
 		//List<? extends Map<String, ?>> data 	: 데이터 Collection
-		//int resource 							: 리스트의 각 라인이 보여질 layout ID 
+		//int resource 							: 리스트의 각 라인이 보여질 layout XML 
 		//						  				  - to에 정의된 아이디가 모두 포함되어 있어야 한다. 복수 지정 가능
 		//String[] from 						: 컬럼네임 
 		//int[] to 								: layout의 아이디
