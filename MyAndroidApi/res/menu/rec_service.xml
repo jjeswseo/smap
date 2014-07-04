@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<item android:id="@+id/action_list"
+          android:icon="@android:drawable/ic_dialog_info"
+          android:title="@string/action_list"
+          android:showAsAction="ifRoom"/>
+     
+    <!-- Location Found -->
+    <item android:id="@+id/action_location_found"
+          android:icon="@android:drawable/ic_media_ff"
+          android:title="@string/action_location_found"
+          android:showAsAction="ifRoom" />
+     
+    <!-- Refresh -->
+    <item android:id="@+id/action_refresh"
+          android:icon="@android:drawable/ic_menu_upload"
+          android:title="@string/action_refresh"
+          android:showAsAction="ifRoom" />
+     
+    <!-- Help -->
+    <item android:id="@+id/action_help"
+          android:icon="@android:drawable/ic_menu_edit"
+          android:title="@string/action_help"
+          android:showAsAction="never"/>
+     
+    <!-- Check updates -->
+    <item android:id="@+id/action_check_updates"
+          android:icon="@android:drawable/ic_dialog_info"
+          android:title="@string/action_check_updates"
+          android:showAsAction="never" />
+
+</menu>

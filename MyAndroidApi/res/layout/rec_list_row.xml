@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@android:dimen/app_icon_size"
+    android:verticalSpacing="10dp"
+    android:horizontalSpacing="10dp"
+    android:stretchMode="columnWidth"
+    android:layout_gravity="center"
+    android:background="@android:color/background_light"
+    android:columnCount="4"
+    android:rowCount="2"
+    >
+    <ImageView android:id="@+id/contract_image"
+        android:layout_width="@android:dimen/app_icon_size"
+    	android:layout_height="match_parent"
+    	android:background="@android:color/holo_purple"
+    	android:layout_gravity="left"
+    	android:layout_rowSpan="2">
+    </ImageView>
+    <TextView android:id="@+id/contract_name"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:background="@android:color/black"
+    	android:layout_columnSpan="2">
+    </TextView>
+    <ImageView android:id="@+id/see_detail"
+        android:layout_width="@android:dimen/app_icon_size"
+    	android:layout_height="match_parent"
+    	android:background="@android:color/holo_green_light"
+    	android:layout_gravity="right"
+    	android:layout_rowSpan="2">
+    </ImageView>
+    <TextView android:id="@+id/contract_number"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:background="@android:color/holo_red_light"
+    	>
+    </TextView>
+    <TextView android:id="@+id/call_date"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:background="@android:color/holo_blue_light"
+    	>
+    </TextView>
+</GridLayout>
