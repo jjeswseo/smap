@@ -4,11 +4,13 @@ package com.jjeswseo.myandroidapi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 public class PhoneStateReceiver extends BroadcastReceiver {
 	private final String TAG = "PhoneStateReceiver";
-	
+	private String incommingNumber = "";
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		
@@ -22,11 +24,16 @@ public class PhoneStateReceiver extends BroadcastReceiver {
 		}
 		else if(state == TelephonyManager.CALL_STATE_RINGING)
 		{
-
+			Bundle bundle = intent.getExtras();
+			incommingNumber = bundle.getString("incoming_number");
+			Log.i(TAG,"IncomingNumber["+incommingNumber+"]");
 		}
 		else if(state == TelephonyManager.CALL_STATE_OFFHOOK)
 		{
-			context.startService(new Intent(context, com.jjeswseo.myandroidapi.RecService.class));
+			
+			Intent recvIntent = new Intent(context, com.jjeswseo.myandroidapi.RecService.class);
+			recvIntent.putExtra("incomingNumber", incommingNumber);
+			context.startService(recvIntent);
 		}
 		if(intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL))
 		{

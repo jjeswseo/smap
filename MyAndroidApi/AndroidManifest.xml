@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_CALL_LOG"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature
@@ -71,9 +72,18 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-                <activity
+        <activity
             android:name="com.jjeswseo.myandroidapi.SwipeRefreshLayoutBasic"
             android:label="@string/title_swipe_refresh_layout_basic" >
+            <intent-filter>
+                <action android:name="com.jjeswseo.myandroidapi.action.DEMO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.jjeswseo.myandroidapi.TestActivity"
+            android:label="@string/title_test_activity" >
             <intent-filter>
                 <action android:name="com.jjeswseo.myandroidapi.action.DEMO" />
 

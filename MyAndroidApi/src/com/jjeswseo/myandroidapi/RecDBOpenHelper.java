@@ -9,9 +9,11 @@ public class RecDBOpenHelper extends SQLiteOpenHelper {
 	final String LOG_TAG = RecDBOpenHelper.class.getSimpleName();
 	static final String DB_NAME = "Recs.db";
 	static final String DB_TABLE_NAME = "Recs";
-	static final int DB_VERSION = 3;
+	static final int DB_VERSION = 5;
 	public RecDBOpenHelper(Context context){
+		
 		super(context, DB_NAME, null, DB_VERSION);
+		Log.i(LOG_TAG, "RecDBOpenHelper Call");
 	}
 
 	@Override
@@ -20,6 +22,7 @@ public class RecDBOpenHelper extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE "+DB_TABLE_NAME +" ("
 				+ "_id					INTEGER PRIMARY KEY AUTOINCREMENT, "
 				+ "call_id 				INTEGER, "
+				+ "contract_id 			TEXT, "
 				+ "call_number			TEXT, "
 				+ "call_date			REAL, "
 				+ "filename			   	TEXT );"

@@ -8,6 +8,7 @@
     <string name="title_activity_dialog">DialogActivity</string>
     <string name="title_activity_rec_list_view">RecListViewActivity</string>
     <string name="title_swipe_refresh_layout_basic">SwipeRefreshLayoutBasic</string>
+    <string name="title_test_activity">TestActivity</string>
     <string name="dialog_activity_text">  How To Use!! Test Text </string>
     <string name="dialog_activity_add">  Add  </string>
     <string name="dialog_activity_remove">  Remove  </string>
