@@ -22,5 +22,11 @@
         android:layout_below="@+id/textView1"
         android:onClick="helloClick"
         android:text="@string/start_record_button" />
+    <ImageView
+        android:id="@+id/photo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="fitCenter" 
+        android:src="@drawable/ic_launcher"/>
 
 </RelativeLayout>

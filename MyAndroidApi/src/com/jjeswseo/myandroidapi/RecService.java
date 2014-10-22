@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.os.IBinder;
 import android.provider.CallLog;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.PhoneLookup;
 import android.util.Log;
@@ -112,23 +113,18 @@ public class RecService extends Service {
 				Log.i("RecService[Runnable]","Saved File ["+tmpDir+File.separator+savedFileName+".3gp]");
 				savedFileName = tmpDir+File.separator+savedFileName+".3gp";
 				
-				Uri lookupUri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI,Uri.encode(number));
+				Uri lookupUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,Uri.encode(number));
 				
-				Cursor cursor = getContentResolver().query(lookupUri,new String[]{Contacts._ID, Contacts.DISPLAY_NAME}, null, null, null);
+				Cursor cursor = getContentResolver().query(lookupUri,new String[]{ContactsContract.PhoneLookup._ID, ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
 				String contractId = "";
 				String contractName = "";
-				if(cursor.getCount() == 1){
+				if(cursor.moveToNext()){
 					Log.i(TAG, cursor.getCount()+"");
-					cursor.moveToNext();
-					contractId = cursor.getString(cursor.getColumnIndex(Contacts._ID));
-					contractName = cursor.getString(cursor.getColumnIndex(Contacts.DISPLAY_NAME));
+					contractId = cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup._ID));
+					contractName = cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
 					
-				}else if(cursor.getCount() > 1){
-					Log.w(TAG, "Contract Count["+cursor.getCount()+"]");
-				}else{
-					contractId ="";
-					contractName="";
 				}
+				cursor.close();
 				
 				RecDBOpenHelper mHelper = new RecDBOpenHelper(getBaseContext());
 				SQLiteDatabase mDb = mHelper.getWritableDatabase();
